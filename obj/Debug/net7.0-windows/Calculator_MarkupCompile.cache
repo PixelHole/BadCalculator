@@ -9,12 +9,12 @@ Calculator
 none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
-M:\Rider projs\RamezoonCalc\CalculatorApp\Calculator\App.xaml
-11407045341
+M:\Rider projs\RamezoonCalc\CalculatorApp\Calculator\Windows\App.xaml
+1-1819699537
 
-3-1233169557
+7-883807969
 1981462702791
-MainWindow.xaml;
+Windows\MainWindow.xaml;
 
-True
+False
 
