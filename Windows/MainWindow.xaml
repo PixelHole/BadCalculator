@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Label Name="Label">ass</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="188*"/>
+        </Grid.RowDefinitions>
+
+
+        <TextBox Name="Input" Margin="10,10,10,0" TextWrapping="Wrap" Text="" TextChanged="TextBoxBase_OnTextChanged"/>
+        <TextBlock Name="Output" Grid.Row="1" TextWrapping="Wrap" Text="" Margin="10,10,10,10"/>
     </Grid>
 </Window>

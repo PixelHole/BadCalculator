@@ -23,17 +23,26 @@ public static class CalculatorCore
         new MathOperator("tan", 5, MathF.Tan),
         new MathOperator("cot", 5, f => 1/MathF.Tan(f)),
     });
-
     public static List<(string? name, float value)> SpecialNumbers = new List<(string? name, float value)>(new[]
     {
         ("pi", MathF.PI),
         ("e", MathF.E),
     }!);
-
+    
     public static float SolveEquation(string equation)
     {
         BadStack<float> result = new BadStack<float>();
 
+        if (string.IsNullOrEmpty(equation))
+        {
+            return 0f;
+        }
+
+        if (float.TryParse(equation, out float num))
+        {
+            return num;
+        }
+        
         BadQueue<(MathOperator? op, float? num)> rpnEq = new BadQueue<(MathOperator? op, float? num)>();
         
         try
@@ -44,17 +53,22 @@ public static class CalculatorCore
         {
             if (e is InvalidOperationException || e is InvalidExpressionException)
             {
-                // invalid parenthesis
-                return -1;
+                throw new SyntaxErrorException("invalid parenthesis placement");
             }
             else if (e is ArgumentException)
             {
                 // unknown operator
-                return -2;
+                throw new SyntaxErrorException("Unknown Operator");
             }
         }
         
         int count = rpnEq.Count;
+
+        if (count == 0)
+        {
+            return 0f;
+        }
+        
         for (int i = 0; i < count; i++)
         {
             var cell = rpnEq.Dequeue();
@@ -76,9 +90,13 @@ public static class CalculatorCore
                             a = result.Pop();
                             b = result.Pop();
                         }
-                        catch (InvalidOperationException)
+                        catch (Exception e)
                         {
-                            return -2;
+                            if (e is InvalidOperationException || e is NullReferenceException)
+                            {
+                                // invalid operator inputs
+                                throw new SyntaxErrorException("invalid operator inputs");
+                            }
                         }
 
                         if (cell.op.LeftToRight)
@@ -91,7 +109,18 @@ public static class CalculatorCore
                         break;
                     
                     case 1:
-                        res = cell.op.SingleInputResult(result.Pop());
+                        try
+                        {
+                            res = cell.op.SingleInputResult(result.Pop());
+                        }
+                        catch (Exception e)
+                        {
+                            if (e is InvalidOperationException || e is NullReferenceException)
+                            {
+                                // invalid operator input
+                                throw new SyntaxErrorException("invalid operator input");
+                            }
+                        }
                         break;
                     
                     case 0:
@@ -105,7 +134,15 @@ public static class CalculatorCore
             }
         }
 
-        return result.Peek();
+        try
+        {
+            return result.Peek();
+        }
+        catch (InvalidOperationException)
+        {
+            throw new SyntaxErrorException("something has gone horribly wrong");
+            return -2;
+        }
     }
 
     public static BadQueue<(MathOperator? op, float? num)> ToRPN(string equation)
@@ -162,7 +199,7 @@ public static class CalculatorCore
             // operator catching
             currentWord.Append(equation[i]);
 
-            string opString = currentWord.ToString().ToLower();
+            string opString = currentWord.ToString();
 
             MathOperator? foundOp = FindOperatorBySign(opString);
 
@@ -208,7 +245,7 @@ public static class CalculatorCore
 
     private static MathOperator? FindOperatorBySign(string sign)
     {
-        MathOperator? res = ValidOperators.Find(op => op.sign == sign);
+        MathOperator? res = ValidOperators.Find(op => op.sign.ToLower() == sign.ToLower());
 
         return res;
     }
