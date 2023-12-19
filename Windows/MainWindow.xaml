@@ -3,17 +3,346 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="530" Background="#FF262F38"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        BorderBrush="Black"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="MainWindow_OnMouseDown">
+
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="CornerRadius" Value="10"></Setter>
+        </Style>
+        <Style TargetType="Thumb">
+            <Setter Property="Background" Value="#FF262F38"/>
+            <Setter Property="BorderBrush" Value="#FF262F38"/>
+        </Style>
+
+        <Style TargetType="RepeatButton">
+            <Setter Property="Visibility" Value="Hidden"/>
+            <Setter Property="Background" Value="#FF3B4955"/>
+            <Setter Property="BorderBrush" Value="#FF262F38"/>
+        </Style>
+    </Window.Resources>
+
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="29*"/>
-            <RowDefinition Height="188*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
+                <Button Name="ClearBtn" Margin="5,0,0,5" Background="#FF3B4955" Foreground="#FFECF3F4" Content="C" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF3B4955" Grid.Row="0" Grid.Column="0" Click="ClearBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="BracketBtn" Margin="5,0,0,5" Background="#FF3B4955" Foreground="#FFECF3F4" Content="( )" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF3B4955" Grid.Row="0" Grid.Column="1" Click="BracketBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="FactorialBtn" Margin="5,0,0,5" Background="#FF3B4955" Foreground="#FFECF3F4" Content="!" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF3B4955" Grid.Row="0" Grid.Column="2" Click="FactorialBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="DivideBtn" Margin="5,0,0,5" Foreground="#FFECF3F4" Content="÷" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF3B4955" Grid.Row="0" Grid.Column="3" Click="DivideBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <SolidColorBrush Color="#FF3B4955"/>
+                    </Button.Background>
+                </Button>
 
-        <TextBox Name="Input" Margin="10,10,10,0" TextWrapping="Wrap" Text="" TextChanged="TextBoxBase_OnTextChanged"/>
-        <TextBlock Name="Output" Grid.Row="1" TextWrapping="Wrap" Text="" Margin="10,10,10,10"/>
+                <Button Name="_1Btn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="1" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="1" Grid.Column="0" Click="_1Btn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="_2Btn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="2" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="1" Grid.Column="1" Click="_2Btn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="_3Btn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="3" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="1" Grid.Column="2" Click="_3Btn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="MultiplicationBtn" Margin="5,0,0,5" Background="#FF3B4955" Foreground="#FFECF3F4" Content="×" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="1" Grid.Column="3" Click="MultiplicationBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Name="_4Btn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="4" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="2" Grid.Column="0" Click="_4Btn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="_5Btn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="5" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="2" Grid.Column="1" Click="_5Btn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="_6Btn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="6" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="2" Grid.Column="2" Click="_6Btn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="SubtractionBtn" Margin="5,0,0,5" Background="#FF3B4955" Foreground="#FFECF3F4" Content="-" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF3B4955" Grid.Row="2" Grid.Column="3" Click="SubtractionBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="_7Btn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="7" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="3" Grid.Column="0" Click="_7Btn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="_8Btn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="8" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="3" Grid.Column="1" Click="_8Btn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="_9Btn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="9" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="3" Grid.Column="2" Click="_9Btn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="AdditionBtn" Margin="5,0,0,5" Background="#FF3B4955" Foreground="#FFECF3F4" Content="+" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF3B4955" Grid.Row="3" Grid.Column="3" Click="AdditionBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Name="SignBtn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="+/-" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="4" Grid.Column="0" Click="SignBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="_0Btn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="0" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="4" Grid.Column="1" Click="_0Btn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="DotBtn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="." FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="4" Grid.Column="2" Click="DotBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="EqualsBtn" Margin="5,0,0,5" Background="#FFFF893B" Foreground="#FFECF3F4" Content="=" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FFFF893B" Grid.Row="4" Grid.Column="3" Click="EqualsBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Button Name="RemoveBtn" Margin="4,5,0,5" Background="#FF262F38" Foreground="#FFECF3F4" Content="←" FontSize="24" FontFamily="Roboto Light" BorderBrush="#FF262F38" Grid.Column="5" Grid.Row="2" Click="RemoveBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="AddMemoryBtn" Margin="4,5,0,5" Background="#FF262F38" Foreground="#FFECF3F4" Content="M+" FontSize="18" FontFamily="Roboto Light" BorderBrush="#FF262F38" Grid.Column="4" Grid.Row="2" Click="AddMemoryBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="RemoveMemoryBtn" Margin="4,5,0,5" Background="#FF262F38" Foreground="#FFECF3F4" Content="M-" FontSize="18" FontFamily="Roboto Light" BorderBrush="#FF262F38" Grid.Column="3" Grid.Row="2" Click="SubtractMemoryBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="MemoryStoreBtn" Margin="4,5,0,5" Background="#FF262F38" Foreground="#FFECF3F4" Content="MS" FontSize="18" FontFamily="Roboto Light" BorderBrush="#FF262F38" Grid.Column="2" Grid.Row="2" Click="MemoryStoreBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="MemoryRecallBtn" Margin="4,5,0,5" Background="#FF262F38" Foreground="#FFECF3F4" Content="MR" FontSize="18" FontFamily="Roboto Light" BorderBrush="#FF262F38" Grid.Column="1" Grid.Row="2" Click="MemoryRecallBtn_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Name="MemoryClear" Margin="4,5,0,5" Background="#FF262F38" Foreground="#FFECF3F4" Content="MC" FontSize="18" FontFamily="Roboto Light" BorderBrush="#FF262F38" Grid.Column="0" Grid.Row="2" Click="MemoryClear_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <TextBox Name="InputField" Margin="5,5,5,0" TextWrapping="Wrap" Grid.ColumnSpan="6" Background="#FF262F38" BorderBrush="#FF262F38" Foreground="#FFECF3F4" FontSize="20" FontFamily="Roboto Light" SelectionBrush="#FF8C9FA2" SelectionTextBrush="#FF8C9FA2" TextChanged="InputField_OnTextChanged"/>
+                <TextBlock Name="ResultBox" Margin="5,0,0,0" Grid.Row="1" TextWrapping="Wrap" Grid.ColumnSpan="6" Foreground="#FFECF3F4" TextAlignment="Right" FontSize="30" FontFamily="Roboto Light"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Name="CloseBtn" Margin="0,5,5,0" Background="#FFFF893B" Foreground="#FFECF3F4" Content="Close" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="0" Grid.Column="1" Click="CloseBtn_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Name="MinimizeBtn" Margin="0,5,5,0" Background="#FFFF893B" Foreground="#FFECF3F4" Content="Minimize" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="0" Grid.Column="0" Click="MinimizeBtn_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Label Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" FontFamily="Roboto Light" Foreground="#FFECF3F4" FontSize="18" VerticalContentAlignment="Center">Special Characters</Label>
+            <Button Name="EulerBtn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="e" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="2" Grid.Column="0" Click="EulerBtn_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Name="PiBtn" Margin="5,0,5,5" Background="#FF465461" Foreground="#FFECF3F4" Content="Pi" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="2" Grid.Column="1" Click="PiBtn_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Label Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" FontFamily="Roboto Light" Foreground="#FFECF3F4" FontSize="18" VerticalContentAlignment="Center">Trigonometry</Label>
+            <Button Name="CosBtn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="Cos" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="4" Grid.Column="0" Click="CosBtn_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Name="SinBtn" Margin="5,0,5,5" Background="#FF465461" Foreground="#FFECF3F4" Content="Sin" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="4" Grid.Column="1" Click="SinBtn_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Name="TanBtn" Margin="5,0,0,5" Background="#FF465461" Foreground="#FFECF3F4" Content="Tan" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="5" Grid.Column="0" Click="TanBtn_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Name="CotBtn" Margin="5,0,5,5" Background="#FF465461" Foreground="#FFECF3F4" Content="Cot" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="5" Grid.Column="1" Click="CotBtn_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Label Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" FontFamily="Roboto Light" Foreground="#FFECF3F4" FontSize="18" VerticalContentAlignment="Center">Miscellaneous</Label>
+            <Button Name="PowBtn" Margin="5,0,5,5" Background="#FF465461" Foreground="#FFECF3F4" Content="^" FontSize="16" FontFamily="Roboto Light" BorderBrush="#FF465461" Grid.Row="7" Grid.Column="0" Click="PowBtn_OnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

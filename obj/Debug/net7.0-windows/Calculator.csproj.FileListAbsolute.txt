@@ -7,7 +7,6 @@ M:\Rider projs\RamezoonCalc\CalculatorApp\Calculator\obj\Debug\net7.0-windows\Ca
 M:\Rider projs\RamezoonCalc\CalculatorApp\Calculator\obj\Debug\net7.0-windows\Windows\MainWindow.g.cs
 M:\Rider projs\RamezoonCalc\CalculatorApp\Calculator\obj\Debug\net7.0-windows\Windows\App.g.cs
 M:\Rider projs\RamezoonCalc\CalculatorApp\Calculator\obj\Debug\net7.0-windows\Calculator_MarkupCompile.cache
-M:\Rider projs\RamezoonCalc\CalculatorApp\Calculator\obj\Debug\net7.0-windows\Calculator_MarkupCompile.lref
 M:\Rider projs\RamezoonCalc\CalculatorApp\Calculator\obj\Debug\net7.0-windows\Windows\MainWindow.baml
 M:\Rider projs\RamezoonCalc\CalculatorApp\Calculator\obj\Debug\net7.0-windows\Calculator.g.resources
 M:\Rider projs\RamezoonCalc\CalculatorApp\Calculator\obj\Debug\net7.0-windows\Calculator.GeneratedMSBuildEditorConfig.editorconfig

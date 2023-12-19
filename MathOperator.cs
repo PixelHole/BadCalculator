@@ -12,9 +12,9 @@ public class MathOperator
     public delegate float SingleInputAction(float a);
     public delegate float NoInputAction();
 
-    public DoubleInputAction DoubleInputResult;
-    public SingleInputAction SingleInputResult;
-    public NoInputAction NoInputResult;
+    public readonly DoubleInputAction DoubleInputResult;
+    public readonly SingleInputAction SingleInputResult;
+    public readonly NoInputAction NoInputResult;
 
     public MathOperator(string sign, int precedence, bool leftToRight, DoubleInputAction doubleInputAction)
     {

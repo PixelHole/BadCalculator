@@ -15,9 +15,9 @@ public static class CalculatorCore
         new MathOperator("+", 2, true, (a, b) => a + b),
         new MathOperator("-", 2, true, (a, b) => a - b),
         new MathOperator("*", 3, true, (a, b) => a * b),
-        new MathOperator("/", 3, true, (a, b) => a / b),
+        new MathOperator("/", 3, true, DivideNumbers),
         new MathOperator("^", 4, true, MathF.Pow),
-        new MathOperator("!", 5, a => 1),
+        new MathOperator("!", 5, GetFactorialOf),
         new MathOperator("sin", 5, MathF.Sin),
         new MathOperator("cos", 5, MathF.Cos),
         new MathOperator("tan", 5, MathF.Tan),
@@ -99,14 +99,21 @@ public static class CalculatorCore
                             }
                         }
 
-                        if (cell.op.LeftToRight)
+                        try
                         {
-                            res = cell.op.DoubleInputResult(b, a);
+                            if (cell.op.LeftToRight)
+                            {
+                                res = cell.op.DoubleInputResult(b, a);
+                                break;
+                            }
+
+                            res = cell.op.DoubleInputResult(a, b);
                             break;
                         }
-                        
-                        res = cell.op.DoubleInputResult(a, b);
-                        break;
+                        catch (SyntaxErrorException e)
+                        {
+                            throw;
+                        }
                     
                     case 1:
                         try
@@ -119,6 +126,10 @@ public static class CalculatorCore
                             {
                                 // invalid operator input
                                 throw new SyntaxErrorException("invalid operator input");
+                            }
+                            if (e is SyntaxErrorException)
+                            {
+                                throw;
                             }
                         }
                         break;
@@ -183,6 +194,18 @@ public static class CalculatorCore
             {
                 if (currentWord.Length > 0) throw new ArgumentException();
                 operators.Push(new MathOperator("(", 0, () => 0));
+                try
+                {
+                    char next = equation[i + 1];
+                    if (next == '-')
+                    {
+                        output.Enqueue((null, 0f));
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    throw new SyntaxErrorException("invalid parenthesis placement");
+                }
                 continue;
             }
             else if (equation[i] == ')')
@@ -206,13 +229,7 @@ public static class CalculatorCore
             if (foundOp != null)
             {
                 currentWord.Clear();
-                
-                // negative sign detection
-                if (foundOp.sign == "-" && operators.Peek().sign == "(")
-                {
-                    output.Enqueue((null, 0f));
-                }
-                
+
                 while (operators.Peek().precedence >= foundOp.precedence)
                 {
                     output.Enqueue((operators.Pop() ,null));
@@ -257,5 +274,25 @@ public static class CalculatorCore
         if (res.name == null) return null;
 
         return res.value;
+    }
+
+    private static float GetFactorialOf(float a)
+    {
+        if (a == 0) return 0f;
+        if (Math.Abs(a - 1) < 0.01f) return 1f;
+
+        float res = 1;
+            
+        for (int i = 2; i <= a; i++)
+        {
+            res *= i;
+        }
+
+        return res;
+    }
+    private static float DivideNumbers(float a, float b)
+    {
+        if (b == 0) throw new SyntaxErrorException("Cannot divide by zero");
+        return a / b;
     }
 }
